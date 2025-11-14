@@ -5,6 +5,7 @@ using namespace std;
 
 void swap (int &a, int &b);
 void sort (vector<int> &v);
+int smallestDifference(vector<int> &v);
 
 int main () {
     int n;
@@ -16,6 +17,7 @@ int main () {
         v.push_back(x);
     }
     sort(v);
+    cout << smallestDifference(v) << endl;
     for (int i = 0; i < n; i++) {
         cout << v.at(i) << ' ';
     }
@@ -40,4 +42,13 @@ void sort (vector<int> &v) {
         }
         swap(v.at(max_i), v.at(i));
     }
+}
+
+int smallestDifference(vector<int> &v) {
+    int minimumDifference = v.at(1) - v.front();
+    for (int i = 0; i < v.size() - 1; i++) {
+        int difference = v.at(i + 1) - v.at(i);
+        if (difference < minimumDifference) minimumDifference = difference;
+    }
+    return minimumDifference;
 }
