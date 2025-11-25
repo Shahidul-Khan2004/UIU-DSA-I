@@ -33,7 +33,6 @@ int main() {
     if(occ.empty()) cout << "Err: -1 -> Element not found." << endl;
     else cout << "Element found at index ";
     for(int i = 0; i < occ.size(); i++) cout << occ[i] << " ";
-    cout << "of the sorted array" << endl;
 }
 
 vector<int> linearSearch(vector<int> &arr, int element) {

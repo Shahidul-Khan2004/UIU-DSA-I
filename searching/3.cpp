@@ -26,14 +26,14 @@ int main() {
     cin >> x;
 
     // Search
-    int index = linearSearch(arr, x);
-    if(index < 0) cout << "Err: " << index << " -> Element not found." << endl;
-    else cout << "Element found at index " << index << endl;
+    int res = linearSearch(arr, x);
+    if(res < 0) cout << "Err: " << res << " -> Element not found." << endl;
+    else cout << "Element -> " << res << endl;
 }
 
 int linearSearch(vector<int> &arr, int element) {
     for(int i = 0; i < arr.size(); i++) {
-        if(arr[i] == element) return i;
+        if(arr[i] > element) return arr[i];
     }
     return -1;
 }
