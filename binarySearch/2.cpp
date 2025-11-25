@@ -27,7 +27,7 @@ int main() {
     cout << "Enter the element: ";
     cin >> x;
 
-    // Bubble Sort
+    // Insertion Sort
     insertionSort(arr);
 
     // Search
