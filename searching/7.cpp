@@ -27,8 +27,7 @@ int main() {
 
     // Search
     int index = binarySearch(arr, x);
-    if(index < 0) cout << "Err: " << index << " -> Element not found." << endl;
-    else cout << "Element found at index " << index << " of the sorted array" << endl;
+    cout << "Should be inserted at index " << index << endl;
 }
 
 int binarySearch(vector<int> &arr, int element) {

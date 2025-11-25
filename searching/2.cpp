@@ -31,8 +31,10 @@ int main() {
     // Search
     occ = linearSearch(arr, x);
     if(occ.empty()) cout << "Err: -1 -> Element not found." << endl;
-    else cout << "Element found at index ";
-    for(int i = 0; i < occ.size(); i++) cout << occ[i] << " ";
+    else {
+        cout << "Element found at index ";
+        for(int i = 0; i < occ.size(); i++) cout << occ[i] << " ";
+    }
 }
 
 vector<int> linearSearch(vector<int> &arr, int element) {
