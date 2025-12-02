@@ -1,36 +1,39 @@
 #include <iostream>
+#include <vector>
 
-void selectionSort(int arr[], int n);
+using namespace std;
 
-int main()
-{
-    int n;
-    std::cout << "Enter the size of the array: ";
-    std::cin >> n;
-    int arr[n];
-    for (int i = 0; i < n; i++)
-        std::cin >> arr[i];
-    selectionSort(arr, n);
-    for (int i = 0; i < n; i++)
-        std::cout << arr[i] << " ";
+void swap (int &a, int &b);
+void sort(vector<int> &arr, int n);
+
+int main() {
+    int n, k;
+    cout << "Size: ";
+    cin >> n;
+    vector<int> arr(n);
+    cout << "Elements of the array: ";
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr, n);
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
 }
 
-void selectionSort(int arr[], int n)
-{
-    for (int i = 0; i < n - 1; i++)
-    {
-        int min = arr[i];
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[j] < min)
-            {
-                min = arr[j];
-                minIndex = j;
+void sort(vector<int> &arr, int n) {
+    for (int i = n - 1; i > 0; i--) {
+        int max = arr[0] * arr[0];
+        int max_i = 0;
+        for (int j = 0; j <= i; j++) {
+            if (arr[j] * arr[j] > max) {
+                max = arr[j] * arr[j];
+                max_i = j;
             }
         }
-        const int temp = arr[i];
-        arr[i] = min;
-        arr[minIndex] = temp;
+        swap(arr[max_i], arr[i]);
     }
+}
+
+void swap (int &a, int &b) {
+    const int temp = a;
+    a = b;
+    b = temp;
 }
