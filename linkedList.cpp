@@ -8,12 +8,13 @@ struct Node
     Node* next;
 };
 
-Node* linkedList = NULL;
+Node* head = nullptr;
 
 Node* createNode(int value);
 void addStart(Node* node);
 void printLinkedList();
 void freeLinkedList();
+void reverseLinkedList();
 
 int main(void){
     cout<<"How many nodes do you want?"<<endl;
@@ -24,28 +25,31 @@ int main(void){
         addStart(newNode);
     }
     printLinkedList();
+    reverseLinkedList();
+    printLinkedList();
     freeLinkedList();
+    printLinkedList();
 }
 
 Node* createNode(int value){
     Node* temp = new Node();
     temp->data = value;
-    temp->next = NULL;
+    temp->next = nullptr;
     return temp;
 }
 
 void addStart(Node* node){
-    if (linkedList != NULL) node->next = linkedList;
-    linkedList = node;
+    if (head != nullptr) node->next = head;
+    head = node;
 }
 
 void printLinkedList(){
-    if (linkedList == NULL) {
+    if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
     }
-    Node* ptr = linkedList;
-    while (ptr->next != NULL){
+    Node* ptr = head;
+    while (ptr->next != nullptr){
         cout<<ptr->data<<" -> ";
         ptr = ptr->next;
     }
@@ -53,12 +57,23 @@ void printLinkedList(){
 }
 
 void freeLinkedList(){
-    Node* ptr = linkedList;
-    while(ptr->next != NULL){
+    Node* ptr = head;
+    while(ptr->next != nullptr){
         Node* ptrPrev = ptr;
         ptr = ptr->next;
         delete ptrPrev;
     }
     delete ptr;
-    linkedList = NULL;
+    head = nullptr;
+}
+
+void reverseLinkedList() {
+    Node* prev = nullptr; Node* curr = head; Node* next = nullptr;
+    while(curr != nullptr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head = prev;
 }
