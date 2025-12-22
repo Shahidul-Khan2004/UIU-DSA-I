@@ -15,6 +15,7 @@ Node* tail = nullptr;
 Node* createNode(int value);
 void addStart(Node* node);
 void addEnd(Node* node);
+void addAfter(int value, int newVal);
 void searchAndDelete(int value);
 void printLinkedList();
 void freeLinkedList();
@@ -25,9 +26,19 @@ int main() {
     int n; cin>>n;
     for(int i = 0; i < n; i++) {
         int val; cout<<"Data in node "<<i+1<<": "; cin >> val;
-        Node* newNode = createNode(val);
-        addStart(newNode);
+        addStart(createNode(val));
     }
+    printLinkedList();
+    addEnd(createNode(6));
+    printLinkedList();
+    addAfter(3, 8);
+    printLinkedList();
+    searchAndDelete(2);
+    printLinkedList();
+    reverseLinkedList();
+    printLinkedList();
+    freeLinkedList();
+    printLinkedList();
 }
 
 Node* createNode(int value) {
@@ -60,6 +71,26 @@ void addEnd(Node* node) {
     tail = node;
 }
 
+void addAfter(int value, int newVal) {
+    Node* newN = createNode(newVal);
+    Node* ptr = head;
+    while (ptr && ptr->data != value) ptr = ptr->next;
+    if (ptr == nullptr) {
+        cout << "target value not found" << endl;
+        return;
+    }
+    if (ptr->next == nullptr) {
+        tail->next = newN;
+        newN->prev = tail;
+        tail = newN;
+        return;
+    }
+    newN->next = ptr->next;
+    ptr->next = newN;
+    newN->prev = ptr;
+    newN->next->prev = newN;
+}
+
 void searchAndDelete(int value) {
     if(head == nullptr) return;
     
@@ -78,4 +109,48 @@ void searchAndDelete(int value) {
     else tmp->next->prev = tmp->prev;
 
     delete tmp;
+}
+
+void printLinkedList() {
+    Node* ptr = head;
+    if (!ptr){ 
+        cout << "it's empty" << endl;
+        return;
+    }
+    while(ptr->next) {
+        cout << ptr->data << " -> ";
+        ptr = ptr->next;
+    }
+    cout << ptr->data << endl;
+}
+
+void freeLinkedList() {
+    Node* ptr = head;
+    if (!ptr) {
+        cout << "already empty" << endl;
+        return;
+    }
+    while (ptr) {
+        Node* tmp = ptr;
+        ptr = ptr -> next;
+        delete tmp;
+    }
+    head = nullptr;
+    tail = nullptr;
+}
+
+void reverseLinkedList() {
+    Node* tmp = nullptr;
+    Node* curr = head;
+
+    while (curr) {
+        tmp = curr->prev;
+        curr->prev = curr->next;
+        curr->next = tmp;
+        curr = curr->prev;
+    }
+
+    tmp = head;
+    head = tail;
+    tail = tmp;
 }
