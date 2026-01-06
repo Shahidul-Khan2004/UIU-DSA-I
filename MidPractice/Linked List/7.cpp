@@ -8,20 +8,19 @@ struct Node {
 };
 
 Node* reverseList(Node* head) {
-    if (!head || !head->next) return head;
     
+    if(!head || !head->next) return head;
+
+    Node* ptr = head;
     Node* prev = nullptr;
-    Node* current = head;
     Node* next = nullptr;
-    
-    while (current) {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
+    while(ptr) {
+        next = ptr->next;
+        ptr->next = prev;
+        prev = ptr;
+        ptr = next;
     }
-    
-    return prev;  // New head
+    return prev;
 }
 
 void printList(Node* head) {
