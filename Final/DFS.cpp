@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <queue>
+#include <stack>
 // number of nodes
 #define n 6
 
@@ -8,7 +8,7 @@ using namespace std;
 
 void addEdge(vector<vector<int>> &list, int a, int b);
 void printList(vector<vector<int>> &list);
-void BFS(vector<vector<int>> &list, int startNode);
+void DFS(vector<vector<int>> &list, int startNode);
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
     addEdge(list, 4, 5);
     addEdge(list, 5, 6);
 
-    BFS(list, 1);
+    DFS(list, 1);
 
     printList(list);
 }
@@ -47,25 +47,27 @@ void printList(vector<vector<int>> &list)
     }
 }
 
-void BFS(vector<vector<int>> &list, int startNode)
+void DFS(vector<vector<int>> &list, int startNode)
 {
     vector<int> visited(n, false);
-    queue<int> q;
-    visited[startNode - 1] = true;
-    q.push(startNode);
+    stack<int> s;
+    s.push(startNode);
 
     cout << "Visited Sequence: ";
-    while (!q.empty())
+    while (!s.empty())
     {
-        int currentNode = q.front();
-        q.pop();
-        cout << currentNode << " ";
-        for (int node : list[currentNode - 1])
+        int currentNode = s.top();
+        s.pop();
+        if (!visited[currentNode - 1])
         {
-            if (!visited[node - 1])
+            visited[currentNode - 1] = true;
+            cout << currentNode << " ";
+            for (int node : list[currentNode - 1])
             {
-                visited[node - 1] = true;
-                q.push(node);
+                if (!visited[node - 1])
+                {
+                    s.push(node);
+                }
             }
         }
     }
