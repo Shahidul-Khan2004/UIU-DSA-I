@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "iostream": "cpp"
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
-    }
-}
