@@ -30,9 +30,9 @@ void addEdge(vector<vector<int>> &A, int x, int y)
 }
 bool isBipartite(vector<vector<int>> &A)
 {
-    vector<int> color(n, -1);
+    vector<string> color(n, "");
     queue<int> q;
-    color[0] = 0;
+    color[0] = "red";
     q.push(0);
     while (!q.empty())
     {
@@ -41,9 +41,9 @@ bool isBipartite(vector<vector<int>> &A)
 
         for (int neighbor : A[curr])
         {
-            if (color[neighbor] == -1)
+            if (color[neighbor].empty())
             {
-                color[neighbor] = 1 - color[curr];
+                color[neighbor] = (color[curr] == "red") ? "blue" : "red";
                 q.push(neighbor);
             }
             else if (color[neighbor] == color[curr])
