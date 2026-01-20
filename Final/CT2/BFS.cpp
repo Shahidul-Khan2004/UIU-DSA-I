@@ -37,7 +37,7 @@ int main()
     addEdgeL(adjList, 2, 6);
     addEdgeL(adjList, 6, 7);
     addEdgeL(adjList, 6, 8);
-    
+
     BFS_List(adjList, 3);
 }
 
