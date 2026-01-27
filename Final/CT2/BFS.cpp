@@ -88,20 +88,16 @@ void BFS_List(vector<vector<int>> &A, int start)
 {
     vector<bool> visited(n, false);
     queue<int> q;
-    visited[start] = true;
     q.push(start);
-    cout << "Visiting seq: ";
-    while (!q.empty())
-    {
+    visited[start] = true;
+    while (!q.empty()) {
         int curr = q.front();
         q.pop();
         cout << curr << " ";
-        for (int neighbor : A[curr])
-        {
-            if (!visited[neighbor])
-            {
-                visited[neighbor] = true;
+        for(int neighbor: A[curr]) {
+            if (!visited[neighbor]) {
                 q.push(neighbor);
+                visited[curr] = true;
             }
         }
     }
